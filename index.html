@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Le voyage à Nantes Nord</title>
+        <!-- TODO : get the description -->
+        <meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- font -->
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+		
+		<!-- stylesheets -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet/less" type="text/x-less" href="less/style.less">
+		
+		<!-- js to be loaded first -->
+		<!-- modernizr -->
+        <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        <!-- less compilation -->
+        <script src="js/vendor/less-1.3.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+        <![endif]-->
+		<!-- bottom menu -->
+        <div class="navbar navbar-inverse navbar-fixed-bottom">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">Le voyage à Nantes Nord</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right">
+                            <li><a href="#about">A propos</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+		<!-- container -->
+		<div id="content" class="container">
+            <div class="row-fluid">
+				<!-- map div -->
+				<div id="mapDiv">
+					<!-- map -->
+					<img alt="map" id="map" src="images/map.png">
+					<!-- point -->
+					<img class="centre" alt="car" id="car" src="images/point.png">
+				</div>
+			</div>
+			<!-- popup -->
+			<div id="popupDiv" class="row-fluid">
+		        <div id="popup">
+		            <div id="innerWhite">
+		                <div id="innerBlack">
+		                </div>
+		            </div>
+		            <img id="ko" alt="ko" src="images/ko.png">
+		            <img id="ok" alt="ok" src="images/ok.png">
+		            <h1 id="title"></h1>
+		            <h2 id="subtitle"></h2>
+		        </div>
+	        </div>
+	    	<!-- video -->
+	        <div id="videoDiv" class="row-fluid"></div>
+        </div>
+        
+        <!-- load js after the page -->
+		<!-- jquery cdn -->        
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+		<!-- bootstrap -->
+        <script src="js/vendor/bootstrap.min.js"></script>
+		<!-- greensock/tween -->
+		<script src="js/vendor/TimelineMax.min.js"></script>
+		<script src="js/vendor/TweenMax.min.js"></script>
+		<!-- socket.io for breakout node.js server -->
+		<script src="/socket.io/socket.io.js"></script>
+		<!-- breakout -->
+		<script src="js/vendor/Breakout.js"></script>
+		<!-- spot js -->
+		<script src="js/main.js"></script>
+		<!-- init the js -->
+		<script type="text/javascript">$(document).ready(initPage);</script>
+        <!-- analytics -->
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

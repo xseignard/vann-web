@@ -1,0 +1,128 @@
+@import "functions";
+
+/* Typo */
+body, .navbar .brand {
+	font-family: Lato,'sans-serif';
+	font-weight: bold;
+}
+
+/* Style */
+body {
+	background-image:url('../images/bg.png');
+	
+/* 	#content { */
+/* 		width: 100%; */
+/* 		margin-right: 0; */
+/* 		margin-left: 0; */
+/* 	} */
+	
+	#mapDiv {
+		background-color: transparent;
+		.opacity(1);
+		#map {
+			height: 100%;
+			max-width: 100%;
+			max-height: 100%;
+			display: block;
+			margin: 0 auto;			
+		}
+	}
+	
+	#videoDiv {
+		z-index: 10001;
+		background-color: black;
+		width: 100%;
+		height: 100%;
+		margin-top: -100%;
+		.opacity(0);
+		position: absolute;
+		#video {
+				margin: 12.5% auto;
+				max-width: 100%;
+				max-height: 100%;
+				width: 100%;
+				height: 100%;
+		}
+		#ko {
+				margin-top: 88.5%;
+				z-index: 10002;
+				margin-left: 2%;
+		}
+	}
+   
+   #popupDiv {    
+    #popup {
+    	position: absolute;
+		margin-top: -90%;
+		background-color: black;
+		margin-left: -79%;
+		z-index: 100001;
+		width: 60%;
+		height: 75%;
+		       
+       #innerWhite {
+           position: absolute;
+           background-color: white;
+           width: 97%;
+           height: 86.5%;
+           margin-left: 1.5%;
+           margin-top: 2%;
+           .border-radius;
+           
+           #innerBlack {
+               position: absolute;
+               background-color: black;
+               width: 81.5%;
+               height: 69%;
+               margin-left: 9.25%;
+               margin-top: 9.5%;
+               .border-radius;
+               
+               #photo {
+               	width: 96%;
+               	height: 94%;
+				margin-left: 2%;
+				margin-top: 1.9%;
+               }
+           }
+       }
+       
+       #ko {
+       	position: absolute;
+		margin-top: 83.5%;
+		margin-left: 8.5%;
+       }
+       
+       #ok {
+		position: absolute;
+		margin-top: 84%;
+		margin-left: 79.5%;
+       }
+       
+       #title, #subtitle {
+		position: absolute;
+		text-align: center;
+		width: 100%;
+       }
+       
+       #title {
+       	font-size: 3em;
+       	margin-top: 71%;
+       }
+       
+       #subtitle {
+        font-size: 1.5em;
+		margin-top: 77%;
+       }
+   }
+   }
+		
+	#car {
+		position: absolute;
+		&.centre {
+			.position(39.7%,31.3%);
+		}
+	}
+	
+}
+
