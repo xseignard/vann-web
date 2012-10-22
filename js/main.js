@@ -341,7 +341,7 @@ function togglePopup(visible) {
 	var currentClassName = $('#car').attr('class');
 	// display the popup only when it's not the centre
 	if (currentClassName != 'centre') {
-		var margin = visible? '20%' : '-79%';
+		var margin = visible? '16.5%' : '-100%';
 		toggleMap(!visible);
 		// sets the good names and photo
 		$.each(titles, function() {
