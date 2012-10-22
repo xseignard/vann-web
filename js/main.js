@@ -415,7 +415,7 @@ function ko() {
  */
 function playVideo(className) {
 	// add html code for the video in the video div
-	$("#videoDiv").html(
+	$("#videoWrapper").html(
 			"<video id=\"video\" src=\"video/" + className + ".webm\"></video>" +
 			"<img id=\"ko\" alt=\"ko\" src=\"images/ko.png\">");
    	// animates the video div
