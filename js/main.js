@@ -1,11 +1,10 @@
-/**
- * Called when the page is ready
- */
-
 // global vars to store the map ratio according the screen resolution
 var xRatio;
 var yRatio;
 
+/**
+ * Called when the page is ready
+ */
 function initPage() {
 	//playWelcomeVideo();
 	
@@ -21,7 +20,6 @@ function initPage() {
 	
 	keyPress();	
 	handlePopupClicks();
-	//initArduino();
 }
 
 /**
@@ -415,9 +413,9 @@ function handlePopupClicks() {
 	$('#ok').click(function() {
 		ok();
 	});
-	$('#ko').click(function() {
+	$('#ko').live('click', function() {
 		ko();
-	});
+	});	
 }
 
 /**
@@ -436,6 +434,7 @@ function ok() {
  * Handles the ko click
  */
 function ko() {
+	console.log('clicked');
 	if (popupDisplayed) {
 		togglePopup(false);
 		stopSound();
@@ -454,7 +453,10 @@ function ko() {
 function playVideo(className) {
 	// add html code for the video in the video div
 	$("#videoWrapper").html(
-			"<video id=\"video\" src=\"video/" + className + ".webm\"></video>" +
+			"<video id=\"video\" class=\"video-js vjs-default-skin\" controls data-setup=\"{}\">" +
+				"<source src=\"video/" + className + ".mp4\" type='video/mp4'>" +
+				"<source src=\"video/" + className + ".webm\" type='video/webm'>" +
+			"</video>" +
 			"<img id=\"ko\" alt=\"ko\" src=\"images/ko.png\">");
    	// animates the video div
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'1'}, ease:Linear.easeNone});
@@ -516,14 +518,6 @@ function playSound(className) {
  * Stops the sound with a fading effect
  */
 function stopSound() {
-//	var interval = setInterval(function() { 
-//		var newVolume = Math.round(sound.volume*10)/10
-//		sound.volume = newVolume - 0.1;
-//        if(sound.volume <= 0) {
-//        	sound.pause();
-//        	clearInterval(interval);
-//        }
-//	}, 50);
 	sound.pause();
 }
 
@@ -580,98 +574,4 @@ function keyPress() {
 	    }
 	    e.preventDefault();
 	});
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//
-// Arduino part
-//
-///////////////////////////////////////////////////////////////////////////////
-
-//convenient breakoutjs vars
-var IOBoard = BO.IOBoard;
-var IOBoardEvent = BO.IOBoardEvent;
-var Pin = BO.Pin;
-var PinEvent = BO.PinEvent;
-var Potentiometer = BO.io.Potentiometer;
-var PotEvent = BO.io.PotEvent;
-var LED = BO.io.LED;
-var Oscillator = BO.generators.Oscillator;
-
-// arduino board
-var arduino = new IOBoard(location.hostname, 8887);
-
-/**
- * Init the arduino board
- */ 
-function initArduino() {
-	// add a listener to be notified when the board is ready
-	arduino.addEventListener(IOBoardEvent.READY, onReady);
-}
-
-/**
- * Called when the arduino board is ready
- * @param evt the event that is sent when the board is ready
- */
-function onReady(evt) {
-	// remove the event listener because it is no longer needed
-	arduino.removeEventListener(IOBoardEvent.READY, onReady);
-
-	// digital pins
-	// pins are 2,3,4,5,6 and 7
-	// enable and add a change event listener for each pin (i.e. each button)
-	for (var pin = 2; pin < 8; ++ pin) {
-		arduino.setDigitalPinMode(pin, Pin.DIN);
-		var button = arduino.getDigitalPin(pin);
-		button.addEventListener(PinEvent.CHANGE, onChange);
-	};
-	
-	// welcome door 
-	arduino.setDigitalPinMode(8, Pin.DIN);
-	var button = arduino.getDigitalPin(8);
-	button.addEventListener(PinEvent.FALLING_EDGE, onChange);
-	
-	// reload button
-	arduino.setDigitalPinMode(9, Pin.DIN);
-	var button = arduino.getDigitalPin(9);
-	button.addEventListener(PinEvent.CHANGE, function() {
-		location.reload();
-	});
-	
-}
-
-/**
- * Handles the changed state of a button
- * @param evt the event sent when the state of a button has changed
- */
-function onChange(evt) {
-	// get the pin number and the value
-	var pin = evt.target.number;
-	var value = evt.target.value;
-	console.log("pin " + pin +" : " + value);
-	// launches the right move given the pin
-	switch (pin) {
-		case 2: // north
-			changePosition(north);
-	        break;
-		case 3: // south
-			changePosition(south);
-	        break;
-		case 4: // west
-			changePosition(west);
-	        break;
-		case 5: // east
-			changePosition(east);
-			break;
-		case 6: // skip the video
-			ko();
-			break;
-		case 7: // plays the video
-			ok();
-			break;
-		case 8: // welcome video
-			playWelcomeVideo();
-		default:
-			break;
-	}
 }
