@@ -11,10 +11,9 @@ function initPage() {
 	// adjust POI just after the map is loaded
 	$('#map').load(function() {
 		adjustPOI();
+		// plays the welcome video
+		playWelcomeVideo();
 	});
-	
-	// plays the welcome video
-	playWelcomeVideo();
 	
 	// adjust POI when the window is resized
 	$(window).resize(function() {
