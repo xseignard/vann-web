@@ -5,6 +5,8 @@ function initPage() {
 	// preload sounds and images
 	preload();
 	
+	// handle some ui effects
+	uiEffects();
 	//playWelcomeVideo();
 	
 	// adjust POI just after the map is loaded
@@ -609,4 +611,19 @@ function adjustPOI() {
 	$('#car').css('height', function() {
 		return (50*yRatio) + 'px';
 	});	
+}
+
+/**
+ * Handles some ui effects
+ */
+function uiEffects() {
+	$('.vlipp, .linkVlipp').hover(
+	  function () {
+	    $('.vlipp').addClass('hovered');
+	  }, 
+	  function () {
+	    $('.vlipp').removeClass('hovered');
+	  }
+	);
+	
 }
