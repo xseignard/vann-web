@@ -9,7 +9,7 @@ function initPage() {
 	uiEffects();
 	
 	// plays the welcome video
-	//playWelcomeVideo();
+	playWelcomeVideo();
 	
 	// adjust POI just after the map is loaded
 	$('#map').load(function() {
@@ -472,7 +472,7 @@ function playWelcomeVideo() {
 	if (!playedWelcome) {
 		setTimeout(function() {
 			playVideo('centre');
-		}, 2000);
+		}, 1000);
 		playedWelcome = true;
 	}
 }
