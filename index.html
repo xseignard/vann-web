@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -19,7 +15,9 @@
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 		<link rel="stylesheet" href="http://vjs.zencdn.net/c/video-js.css">
 		<link rel="stylesheet/less" type="text/x-less" href="less/style.less">
-		
+		<!--[if IE]>
+		<link rel="stylesheet" href="http://browsehappy.com/content/themes/browsehappy/style.css">
+		<!--<![endif]-->
 		<!-- js to be loaded first -->
 		<!-- modernizr -->
         <script src="js/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
@@ -29,9 +27,7 @@
 		<script src="http://vjs.zencdn.net/c/video.js"></script>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-        <![endif]-->
+
 		<!-- bottom menu -->
         <div class="navbar navbar-inverse navbar-fixed-bottom">
             <div class="navbar-inner">
@@ -41,6 +37,8 @@
                         <ul class="nav pull-right">
                             <li><a href="#about">A propos</a></li>
                             <li><a href="#contact">Contact</a></li>
+                            <li class="social first"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Faites un voyage à Nantes nord!" data-via="vlipp">Tweet</a></li>
+                        	<li class="social"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2F82.235.243.114%3A8080%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:107px; height:21px;" allowTransparency="true"></iframe></li>
                         </ul>
                     </div>
                 </div>
@@ -49,6 +47,35 @@
 
 		<!-- container -->
 		<div id="content" class="container">
+			<!--[if IE]>
+            <div class="row">
+				<div id="browserlist" class="span6 offset3">
+					<h2>Cette page n'est compatible qu'avec l'un des navigateurs suivants</h2>
+				</div>
+				<div id="browserlist" class="span4 offset4">
+					<ul class="wrap">
+						<li id="chrome">
+							<a href="http://www.google.com/chrome" title="Google Chrome">
+								<div class="icon"></div>
+								<h2>Google Chrome</h2>
+								<p class="info">« Un nouveau navigateur rapide conçu par Google. Essayez-le maintenant ! »</p>
+								<p class="website">Allez sur le site pour plus d'information</p>
+							</a>
+						</li>
+						<li id="firefox">
+							<a href="http://www.firefox.com/" title="Mozilla Firefox">
+								<div class="icon"></div>
+								<h2>Mozilla Firefox</h2>
+								<p class="info">« Pour Firefox, votre sécurité en ligne est une priorité absolue. Firefox est gratuit, et conçu pour vous aider à tirer le meilleur parti du web. »</p>
+								<p class="website">Allez sur le site pour plus d'information</p>
+							</a>
+						</li>
+					</ul>	
+				</div>
+			</div>
+        	<![endif]-->
+			
+			<!--[if !IE]><!-->
 			<!-- map div -->
 			<div id="mapDiv">
 				<!-- map -->
@@ -90,6 +117,7 @@
 		<script src="js/main.js"></script>
 		<!-- init the js -->
 		<script type="text/javascript">$(document).ready(initPage);</script>
+		<!--<![endif]-->
         <!-- analytics -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
@@ -97,5 +125,16 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+        <script>
+        	!function(d,s,id){
+        		var js,fjs=d.getElementsByTagName(s)[0];
+        		if(!d.getElementById(id)){
+        			js=d.createElement(s);
+        			js.id=id;js.src="//platform.twitter.com/widgets.js";
+        			fjs.parentNode.insertBefore(js,fjs);
+        		}
+        	}(document,"script","twitter-wjs");
+        </script>
+        
     </body>
 </html>
