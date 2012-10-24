@@ -365,6 +365,14 @@ function togglePopup(visible) {
 				$('#innerBlack').html('<img id="photo" alt="photo" src="images/photos/' + this.className + '.jpg">');
 			}
 		});
+		
+		// adjusts margin top
+		var popupHeight = $('#popup').outerHeight();
+		var windowHeight = $(window).height();
+		var navBarHeight = $('#navbar').height();
+		var marginTop = (windowHeight - popupHeight - navBarHeight)/2;
+		$('#popup').css('margin-top', marginTop + "px");
+		
 		// displays the popup
 		TweenMax.to($('#popup'), 1.5, {css:{marginLeft:margin}, ease:Back.easeOut});
 	}
@@ -412,7 +420,6 @@ function ok() {
  * Handles the ko click
  */
 function ko() {
-	console.log('clicked');
 	if (popupDisplayed) {
 		togglePopup(false);
 		stopSound();
@@ -435,7 +442,7 @@ function playVideo(className) {
 				"<source src=\"video/" + className + ".mp4\" type='video/mp4'>" +
 				"<source src=\"video/" + className + ".webm\" type='video/webm'>" +
 			"</video>" +
-			"<img id=\"ko\" alt=\"ko\" src=\"img/close.png\">");
+			"<img id=\"ko\" alt=\"ko\" src=\"images/close.png\">");
    	// animates the video div
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'1'}, ease:Linear.easeNone});
    	// plays the video

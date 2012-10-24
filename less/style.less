@@ -34,6 +34,28 @@ body {
 				padding-left: 15px;
 			}
 		}
+		
+		#arrows {
+			margin-left: 60px;
+			color: #F4690C;
+			
+			#left {
+				margin-top: 13px;
+				margin-right: -5px;
+				margin-left: 5px;
+			}
+			#up {
+				margin-top: 3px;
+			}
+			#down {
+				margin-top: 21px;
+				margin-left: -26px;
+			}
+			#right {
+				margin-top: 13px;
+				margin-left: -5px;
+			}
+		}
 	}
 	
 	#mapDiv {
@@ -55,6 +77,7 @@ body {
 	
 	#videoDiv {
 		position: absolute;
+		z-index: 1031;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -66,7 +89,6 @@ body {
 		#videoContent {
 			display: table-cell;
 			vertical-align: middle;
-			z-index: 1029;
 			background-color: black;
 			
 			#videoWrapper {
@@ -79,7 +101,7 @@ body {
 				}
 				#ko {
 					cursor: pointer;
-					z-index: 8040;
+					z-index: 1032;
 					margin-left: -38px;
 					margin-top: 5px;
 					position: absolute;
@@ -91,23 +113,30 @@ body {
 	
 
    
-   #popupDiv {    
-	    #popup {
+   #popupDiv {
+	position: absolute;
+	display: table;
+	top: 0;
+	
+	#popupWrapper {
+		display: table-cell;
+		vertical-align: middle;
+	#popup {
 	    	position: relative;
 			background-color: black;
 			z-index: 100001;
 			width: 67%;
-			height: 75%;
-			margin-top: -70%;
 			margin-left: -100%;
+			margin-top: 100px;
+			margin-bottom: 0;
 			padding: 1% 0 100px 0;
 			       
 	       #innerWhite {
 	           position: relative;
 	           background-color: white;
 	           width: 97%;
-	           height: 86.5%;
 	           padding-top: 5%;
+	           padding-bottom: 1%;
 	           margin: auto;
 	           .border-radius;
 	           
@@ -115,13 +144,12 @@ body {
 	               position: relative;
 	               background-color: black;
 	               width: 81.5%;
-	               height: 69%;
-	               margin-left: 9.25%;
+	               margin-left: auto;
+	               margin-right: auto;
 	               .border-radius;
 	               
 	               #photo {
 	               	width: 96%;
-	               	height: 94%;
 					margin: 2% 2%;
 	               }
 	           }
@@ -135,13 +163,13 @@ body {
 	       
 	       #ko {
 			float: left;
-			margin-top: 2px;
+			margin-top: 10px;
 			margin-left: 20px;
 	       }
 	       
 	       #ok {
 			float: right;
-			margin-top: 6px;
+			margin-top: 13px;
 			margin-right: 20px;
 	       }
 	       
@@ -152,6 +180,8 @@ body {
 			color: black;
 	       }
 	   }
+	}    
+	    
    }
 	
 }
