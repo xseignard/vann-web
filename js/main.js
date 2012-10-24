@@ -1,11 +1,10 @@
-// global vars to store the map ratio according the screen resolution
-var xRatio;
-var yRatio;
-
 /**
  * Called when the page is ready
  */
 function initPage() {
+	// preload sounds and images
+	preload();
+	
 	//playWelcomeVideo();
 	
 	// adjust POI just after the map is loaded
@@ -20,29 +19,6 @@ function initPage() {
 	
 	keyPress();	
 	handlePopupClicks();
-}
-
-/**
- * Function to adjust size and placement of the POI given the map size.
- */
-function adjustPOI() {
-	// get the ratios
-	xRatio = $('#map').width()/1170;
-	yRatio = $('#map').height()/960;	
-	
-	// adjsut left, top, width and height css attributes
-	$('#car').css('left', function() {
-		return (423*xRatio) + 'px';
-	});
-	$('#car').css('top', function() {
-		return (330*yRatio) + 'px';
-	});
-	$('#car').css('width', function() {
-		return (50*xRatio) + 'px';
-	});
-	$('#car').css('height', function() {
-		return (50*yRatio) + 'px';
-	});	
 }
 
 // global var to flag an ongoing move
@@ -574,4 +550,63 @@ function keyPress() {
 	    }
 	    e.preventDefault();
 	});
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Web related part
+//
+///////////////////////////////////////////////////////////////////////////////
+
+//global vars to store the map ratio according the screen resolution
+var xRatio;
+var yRatio;
+
+// POIs names
+var poiNames = ["boucherie", "cimetiere", "erdre", "hippodrome", "mur", "prison", "tour", "usine"];
+
+/**
+ * Preload images and sounds
+ */
+function preload() {
+    if (!preload.cache) {
+        preload.cache = [];
+    }
+    var preloaded;
+    
+    // preload images
+    for (var i = 0; i < poiNames.length; i++) {
+    	preloaded = new Image();
+    	preloaded.src = "images/photos/" + poiNames[i] + ".jpg";
+        preload.cache.push(preloaded);
+    }
+    // then preload sounds
+    for (var i = 0; i < poiNames.length; i++) {
+    	preloaded = new Audio();
+    	preloaded.src = "son/" + poiNames[i] + ".ogg";
+        preload.cache.push(preloaded);
+    }
+}
+
+/**
+ * Function to adjust size and placement of the POI given the map size.
+ */
+function adjustPOI() {
+	// get the ratios
+	xRatio = $('#map').width()/1170;
+	yRatio = $('#map').height()/960;	
+	
+	// adjsut left, top, width and height css attributes
+	$('#car').css('left', function() {
+		return (423*xRatio) + 'px';
+	});
+	$('#car').css('top', function() {
+		return (330*yRatio) + 'px';
+	});
+	$('#car').css('width', function() {
+		return (50*xRatio) + 'px';
+	});
+	$('#car').css('height', function() {
+		return (50*yRatio) + 'px';
+	});	
 }
