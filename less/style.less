@@ -58,7 +58,12 @@ body {
 					max-width: 100%;
 				}
 				#ko {
-					margin-left: 1%;
+					cursor: pointer;
+					z-index: 8040;
+					margin-left: -38px;
+					margin-top: 5px;
+					position: absolute;
+					.opacity(0.8);
 				}
 			}
 		}	
@@ -102,14 +107,17 @@ body {
 	           }
 	       }
 	       
-	       #ko {
+	       #ko, #ok {
+	       	cursor: pointer;
 	       	position: relative;
+	       }
+	       
+	       #ko {
 			margin-top: -4%;
 			margin-left: 8.5%;
 	       }
 	       
 	       #ok {
-			position: relative;
 			margin-top: -14%;
 			margin-left: 79.5%;
 	       }

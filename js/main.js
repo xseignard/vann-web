@@ -433,7 +433,7 @@ function playVideo(className) {
 				"<source src=\"video/" + className + ".mp4\" type='video/mp4'>" +
 				"<source src=\"video/" + className + ".webm\" type='video/webm'>" +
 			"</video>" +
-			"<img id=\"ko\" alt=\"ko\" src=\"images/ko.png\">");
+			"<img id=\"ko\" alt=\"ko\" src=\"img/close.png\">");
    	// animates the video div
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'1'}, ease:Linear.easeNone});
    	// plays the video
