@@ -7,6 +7,8 @@ function initPage() {
 	
 	// handle some ui effects
 	uiEffects();
+	
+	// plays the welcome video
 	//playWelcomeVideo();
 	
 	// adjust POI just after the map is loaded
@@ -582,6 +584,11 @@ function preload() {
         preload.cache = [];
     }
     var preloaded;
+    
+    // preload the map first
+    preloaded = new Image();
+	preloaded.src = "images/map.png";
+    preload.cache.push(preloaded);
     
     // preload images
     for (var i = 0; i < poiNames.length; i++) {
