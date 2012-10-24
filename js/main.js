@@ -8,13 +8,13 @@ function initPage() {
 	// handle some ui effects
 	uiEffects();
 	
-	// plays the welcome video
-	playWelcomeVideo();
-	
 	// adjust POI just after the map is loaded
 	$('#map').load(function() {
 		adjustPOI();
 	});
+	
+	// plays the welcome video
+	playWelcomeVideo();
 	
 	// adjust POI when the window is resized
 	$(window).resize(function() {
