@@ -444,7 +444,11 @@ function playVideo(className) {
 				"<source src=\"video/" + className + ".webm\" type='video/webm'>" +
 			"</video>" +
 			"<img id=\"ko\" alt=\"ko\" src=\"images/close.png\">");
-   	// animates the video div
+   	
+	// put the video on top of the navbar
+	var navbarZIndex = $('#navbar').css('z-index');
+	$('#videoDiv').css('z-index', navbarZIndex + 1);
+	// animates the video div
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'1'}, ease:Linear.easeNone});
    	// plays the video
 	setTimeout(function() {
@@ -461,6 +465,8 @@ function playVideo(className) {
  */
 function hideVideo() {
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'0'}, ease:Linear.easeNone});
+	// put the video behind the navbar
+	$('#videoDiv').css('z-index', 0);
 	moving = false;
 }
 
