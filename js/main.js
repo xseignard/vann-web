@@ -25,7 +25,7 @@ function initPage() {
 }
 
 // global var to flag an ongoing move
-var moving = false;
+var canMove = false;
 
 // global var to flag if the popup is displayed
 var popupDisplayed = false;
@@ -320,13 +320,15 @@ var south =
  */
 function move(json) {
 	var className = $("#car").attr('class');
+	
+	// stops the sound manually for centre since there is no popup
 	if (className == 'centre') {
 		sound.pause();
 	}
-	
-	moving = true;
+	// cannot move while already moving
+	canMove = false;
 	// the end className
-	var className = json.end;
+	className = json.end;
 	// plays the sound
 	playSound(className)
 	// the timeline handling the move
@@ -352,7 +354,10 @@ function move(json) {
  * @param visible true if the popup needs to be visible
  */
 function togglePopup(visible) {
+	// popup is visible
 	popupDisplayed = visible;
+	// can move again
+	canMove = true;
 	var currentClassName = $('#car').attr('class');
 	// display the popup only when it's not the centre
 	if (currentClassName != 'centre') {
@@ -376,10 +381,6 @@ function togglePopup(visible) {
 		
 		// displays the popup
 		TweenMax.to($('#popup'), 1.5, {css:{marginLeft:margin}, ease:Back.easeOut});
-	}
-	// else, says the point is not moving anymore
-	else {
-		moving = false;
 	}
 }
 
@@ -424,7 +425,6 @@ function ko() {
 	if (popupDisplayed) {
 		togglePopup(false);
 		stopSound();
-		moving = false;
 	}
 	else if(!$("#video")[0].paused) {
 		hideVideo();
@@ -437,6 +437,8 @@ function ko() {
  * @param className the css class name of the current point position
  */
 function playVideo(className) {
+	// cannot move
+	canMove = false;
 	// add html code for the video in the video div
 	$("#videoWrapper").html(
 			"<video id=\"video\" class=\"video-js vjs-default-skin\" controls data-setup=\"{}\">" +
@@ -467,7 +469,7 @@ function hideVideo() {
 	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'0'}, ease:Linear.easeNone});
 	// put the video behind the navbar
 	$('#videoDiv').css('z-index', 0);
-	moving = false;
+	canMove = true;
 }
 
 /**
@@ -519,12 +521,15 @@ function stopSound() {
  * @param json the json data that handles the move from one to another point
  */
 function changePosition(json) {
-	if (!moving) {
+	if (canMove) {
 		// gets the current css class name of the #car dom element
 		var className = $("#car").attr('class');
 		// iterates over the json message to find the class name in the src attribute
 		$.each(json, function() {
 	        if (this.src == className) {
+	        	if (popupDisplayed) {
+	        		ko();
+	        	}
 	        	move(this.target);
 	        }
 		});
