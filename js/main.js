@@ -8,17 +8,8 @@ function initPage() {
 	// handle some ui effects
 	uiEffects();
 	
-	// adjust POI just after the map is loaded
-	$('#map').load(function() {
-		adjustPOI();
-		// plays the welcome video
-		playWelcomeVideo();
-	});
-	
-	// adjust POI when the window is resized
-	$(window).resize(function() {
-		adjustPOI();
-	});
+	// plays the welcome video
+	playWelcomeVideo();
 	
 	keyPress();	
 	handlePopupClicks();
@@ -35,6 +26,9 @@ var playedWelcome = false;
 
 // global var for the ambient sound
 var sound = new Audio();
+
+// the player
+var player;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -388,7 +382,6 @@ function togglePopup(visible) {
  * Toggles the map visibility
  */
 function toggleMap(visible) {
-	var bgColor = visible? 'transparent' : 'black';
 	var opacity = visible? '1' : '0.3';
 	// toggles the map
 	TweenMax.to($('#mapDiv'), 1, {css:{opacity:opacity}, ease:Linear.easeNone});	
@@ -412,9 +405,12 @@ function handlePopupClicks() {
 function ok() {
 	if (popupDisplayed) {
 		togglePopup(false);
+		canMove = false;
 		var className = $('#car').attr('class');
 		stopSound();
-		playVideo(className);
+		setTimeout(function() {
+			playVideo(className);
+		}, 1000);
 	}
 }
 
@@ -422,13 +418,12 @@ function ok() {
  * Handles the ko click
  */
 function ko() {
+	if (typeof(player) != 'undefined') {
+		player.pause();
+	}
 	if (popupDisplayed) {
 		togglePopup(false);
 		stopSound();
-	}
-	else if(!$("#video")[0].paused) {
-		hideVideo();
-		$("#video")[0].pause();
 	}
 }
 
@@ -439,37 +434,43 @@ function ko() {
 function playVideo(className) {
 	// cannot move
 	canMove = false;
-	// add html code for the video in the video div
-	$("#videoWrapper").html(
-			"<video id=\"video\" class=\"video-js vjs-default-skin\" controls data-setup=\"{}\">" +
-				"<source src=\"video/" + className + ".mp4\" type='video/mp4'>" +
-				"<source src=\"video/" + className + ".webm\" type='video/webm'>" +
-			"</video>" +
-			"<img id=\"ko\" alt=\"ko\" src=\"images/close.png\">");
-   	
-	// put the video on top of the navbar
-	var navbarZIndex = $('#navbar').css('z-index');
-	$('#videoDiv').css('z-index', navbarZIndex + 1);
-	// animates the video div
-	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'1'}, ease:Linear.easeNone});
-   	// plays the video
-	setTimeout(function() {
-		$("#video")[0].play();
-	}, 2000);
-	// adds a handler for the end of video event
-	$("#video").bind("ended", function() {
-   		hideVideo();
-   	});
-}
+	
+	_V_("example_video_1").ready(function(){
 
-/**
- * Hides the video
- */
-function hideVideo() {
-	TweenMax.to($('#videoDiv'), 1, {css:{opacity:'0'}, ease:Linear.easeNone});
-	// put the video behind the navbar
-	$('#videoDiv').css('z-index', 0);
-	canMove = true;
+	      var myPlayer = this;
+
+	      // EXAMPLE: Start playing the video.
+	      myPlayer.play();
+
+	    });
+	// creates the player
+	player = _V_('video');
+	player.ready(function(){
+		player.src([
+            {type: 'video/webm', src: 'video/' + className + '.webm'},
+            {type: 'video/mp4', src: 'video/' + className + '.mp4'}
+        ]);
+		//player.size($(window).width()/2,$(window).height()/2);
+	});
+	
+	// add html code for the video in the video div
+	$.fancybox(
+		{
+			href : '#video'
+		}
+		,
+		{
+			afterLoad: function() {
+				setTimeout(function() {
+					player.play();
+				}, 1000);
+			},
+			afterClose:function() {
+				player.pause();
+				canMove = true;
+			}
+		}
+	);
 }
 
 /**
@@ -478,6 +479,7 @@ function hideVideo() {
 function playWelcomeVideo() {
 	if (!playedWelcome) {
 		setTimeout(function() {
+			adjustPOI();
 			playVideo('centre');
 		}, 1000);
 		playedWelcome = true;
@@ -618,9 +620,8 @@ function preload() {
  * Function to adjust size and placement of the POI given the map size.
  */
 function adjustPOI() {
-	// get the ratios
 	xRatio = $('#map').width()/1170;
-	yRatio = $('#map').height()/960;	
+	yRatio = $('#map').height()/960;
 	
 	// adjsut left, top, width and height css attributes
 	$('#car').css('left', function() {
