@@ -435,42 +435,32 @@ function playVideo(className) {
 	// cannot move
 	canMove = false;
 	
-	_V_("example_video_1").ready(function(){
-
-	      var myPlayer = this;
-
-	      // EXAMPLE: Start playing the video.
-	      myPlayer.play();
-
-	    });
 	// creates the player
 	player = _V_('video');
+	player.src([
+        {type: 'video/webm', src: 'video/' + className + '.webm'},
+        {type: 'video/mp4', src: 'video/' + className + '.mp4'}
+    ]);
+	player.size($(window).width()/2,$(window).height()/2);
 	player.ready(function(){
-		player.src([
-            {type: 'video/webm', src: 'video/' + className + '.webm'},
-            {type: 'video/mp4', src: 'video/' + className + '.mp4'}
-        ]);
-		//player.size($(window).width()/2,$(window).height()/2);
+		// add html code for the video in the video div
+		$.fancybox(
+			{href : '#video'},
+			{
+				afterLoad: function() {
+					setTimeout(function() {
+						player.play();
+					}, 1000);
+				},
+				afterClose:function() {
+					player.pause();
+					canMove = true;
+				}
+			}
+		);
 	});
 	
-	// add html code for the video in the video div
-	$.fancybox(
-		{
-			href : '#video'
-		}
-		,
-		{
-			afterLoad: function() {
-				setTimeout(function() {
-					player.play();
-				}, 1000);
-			},
-			afterClose:function() {
-				player.pause();
-				canMove = true;
-			}
-		}
-	);
+	
 }
 
 /**
