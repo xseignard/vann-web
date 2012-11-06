@@ -11,7 +11,8 @@ function initPage() {
 	// plays the welcome video
 	playWelcomeVideo();
 	
-	keyPress();	
+	keyPress();
+	touchArrows();
 	handlePopupClicks();
 }
 
@@ -324,7 +325,7 @@ function move(json) {
 	// the end className
 	className = json.end;
 	// plays the sound
-	playSound(className)
+	playSound(className);
 	// the timeline handling the move
 	var tl = new TimelineMax({onComplete:togglePopup, onCompleteParams:[true]});	
 	tl.pause();
@@ -338,7 +339,7 @@ function move(json) {
 	// changes the css class to know where is the map marker
 	tl.call(function() {
 		$('#car').removeClass().addClass(className);
-	})
+	});
 	tl.play();
 }
 
@@ -373,6 +374,9 @@ function togglePopup(visible) {
 		var marginTop = (windowHeight - popupHeight - navBarHeight)/2;
 		$('#popup').css('margin-top', marginTop + "px");
 		
+		// z-index
+		var index = visible? 'initial' : '-1';
+		$('#popupDiv').css('z-index', index);
 		// displays the popup
 		TweenMax.to($('#popup'), 1.5, {css:{marginLeft:margin}, ease:Back.easeOut});
 	}
@@ -445,7 +449,16 @@ function playVideo(className) {
 	player.ready(function(){
 		// add html code for the video in the video div
 		$.fancybox(
-			{href : '#video'},
+			{
+				href : '#video',
+				helpers : {
+			        overlay : {
+			            css : {
+			                'background' : 'rgba(255, 255, 255, 0.3)'
+			            }
+			        }
+			    }
+			},
 			{
 				afterLoad: function() {
 					setTimeout(function() {
@@ -458,6 +471,9 @@ function playVideo(className) {
 				}
 			}
 		);
+	});
+	player.addEvent('ended', function() {
+		$.fancybox.close(true);
 	});
 	
 	
@@ -491,7 +507,7 @@ function playSound(className) {
 	sound.play();
 	// raise the volume slowly
 	var interval = setInterval(function() { 
-		var newVolume = Math.round(sound.volume*10)/10
+		var newVolume = Math.round(sound.volume*10)/10;
 		sound.volume = newVolume + 0.1;
         if(sound.volume >= 1) {
         	clearInterval(interval);
@@ -564,6 +580,68 @@ function keyPress() {
 	    e.preventDefault();
 	});
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Touch part
+//
+///////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Handles the touch arrows
+ */
+function touchArrows() {
+	var arrows = ['#left','#right','#up','#down'];
+	var d, touchStartTime, touchEndTime, touchStartLocation, touchEndLocation;
+	
+	
+	for (var i=0; i<arrows.length; i++) {
+		$(arrows[i]).bind('touchstart', function() {
+			d = new Date();
+			touchStartTime = d.getTime();
+			touchStartLocation = mouse.location(x,y);
+		});
+
+		$(arrows[i]).bind('touchend', function() {
+			d = new Date();
+			touchEndTime= d.getTime();
+			touchEndLocation= mouse.location(x,y);
+			var distance = touchEndLocation - touchStartLocation;
+			var duration = touchEndTime - touchStartTime;
+			if (distance<=10 && duration < 200) {
+				moveWithArrows($(this));
+			}
+		});
+		$(arrows[i]).bind('click', function() {
+			moveWithArrows($(this));
+		});
+	}
+}
+/**
+ * Move with arrows
+ * @param distance
+ * @param duration
+ * @param element
+ */
+function moveWithArrows(element) {
+	switch (element.attr('id')) {
+		case 'left':
+			changePosition(west);
+			break;
+		case 'right':
+			changePosition(east);
+			break;
+		case 'up':
+			changePosition(north);
+			break;
+		case 'down':
+			changePosition(south);
+			break;
+		default:
+			break;
+	}
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 //

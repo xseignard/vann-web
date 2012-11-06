@@ -7,11 +7,16 @@ body, .navbar .brand {
 }
 
 /* Some overriding */
-.fancybox-overlay {
-	overflow: hidden !important;
+.fancybox-lock {
+	margin-right:0!important;
+	
+	.fancybox-overlay {
+		overflow-x: hidden!important;
+		overflow-y: hidden!important;
+	}
 }
 .video-js.vjs-default-skin .vjs-big-play-button { 
-	display: none; 
+	display: none!important; 
 }
 
 /* Style */
@@ -45,24 +50,28 @@ body {
 		}
 		
 		#arrows {
-			margin-left: 60px;
+			text-align: center;
+			float: none;
 			color: #F4690C;
+			padding-top: 4px;
 			
-			#left {
-				margin-top: 13px;
-				margin-right: -5px;
-				margin-left: 5px;
-			}
-			#up {
-				margin-top: 3px;
-			}
-			#down {
-				margin-top: 21px;
-				margin-left: -26px;
-			}
-			#right {
-				margin-top: 13px;
-				margin-left: -5px;
+			li {
+				margin-top: 7px;
+				margin-right: 16px;
+				display: inline;
+				zoom: 1;
+				float: none;
+				cursor: pointer;
+				&:first-child {
+					margin-left: 5px;
+				}
+				
+				i {
+					border: #F4690C 2px solid;
+					border-radius: 6px;
+					box-shadow: 2px 2px #F4690C;
+					padding-top: 3px;
+				}
 			}
 		}
 	}
@@ -73,6 +82,7 @@ body {
 		position: relative;
 		#map {
 			max-height: 100%;
+			width: auto;
 			margin: 0 auto;			
 		}
 		
@@ -96,6 +106,7 @@ body {
 	position: absolute;
 	display: table;
 	top: 0;
+	z-index: -1;
 	
 	#popupWrapper {
 		display: table-cell;
