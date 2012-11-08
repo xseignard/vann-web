@@ -14,6 +14,7 @@ function initPage() {
 	keyPress();
 	touchArrows();
 	handlePopupClicks();
+	about();
 }
 
 // global var to flag an ongoing move
@@ -718,5 +719,25 @@ function uiEffects() {
 	    $('.vlipp').removeClass('hovered');
 	  }
 	);
-	
+}
+
+/**
+ * Handle about popup
+ */
+function about() {
+	$('#aboutLink').fancybox({
+		helpers : {
+	        overlay : {
+	            css : {
+	                'background' : 'rgba(255, 255, 255, 0.3)'
+	            }
+	        }
+	    },
+		beforeShow:function() {
+			canMove = false;
+		},	    
+		afterClose:function() {
+			canMove = true;
+		}
+	});
 }
