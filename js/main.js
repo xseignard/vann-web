@@ -725,7 +725,7 @@ function uiEffects() {
  * Handle about popup
  */
 function about() {
-	$('#aboutLink').fancybox({
+	$('#aboutLink,#vannLink').fancybox({
 		helpers : {
 	        overlay : {
 	            css : {
