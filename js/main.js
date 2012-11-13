@@ -368,13 +368,6 @@ function togglePopup(visible) {
 			}
 		});
 		
-		// adjusts margin top
-		var popupHeight = $('#popup').outerHeight();
-		var windowHeight = $(window).height();
-		var navBarHeight = $('#navbar').height();
-		var marginTop = (windowHeight - popupHeight - navBarHeight)/2;
-		$('#popup').css('margin-top', marginTop + "px");
-		
 		// displays the popup
 		TweenMax.to($('#popup'), 1.5, {css:{marginLeft:margin}, ease:Back.easeOut});
 	}
