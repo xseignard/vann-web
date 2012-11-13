@@ -375,9 +375,6 @@ function togglePopup(visible) {
 		var marginTop = (windowHeight - popupHeight - navBarHeight)/2;
 		$('#popup').css('margin-top', marginTop + "px");
 		
-		// z-index
-		var index = visible? 'initial' : '-1';
-		$('#popupDiv').css('z-index', index);
 		// displays the popup
 		TweenMax.to($('#popup'), 1.5, {css:{marginLeft:margin}, ease:Back.easeOut});
 	}
