@@ -19,6 +19,9 @@ body, .navbar .brand {
 	display: none!important; 
 }
 
+/* Global orange color */
+@orange: #F4690C;
+
 /* Style */
 body {
 	background-image:url('../images/bg.png');
@@ -29,7 +32,7 @@ body {
 		#navigation {
 		
 			#vannLink {
-				color: #F4690C;
+				color: @orange;
 				
 				&:hover {
 					text-decoration: underline;
@@ -61,7 +64,7 @@ body {
 		#arrows {
 			text-align: center;
 			float: none;
-			color: #F4690C;
+			color: @orange;
 			padding-top: 4px;
 			
 			li {
@@ -76,9 +79,9 @@ body {
 				}
 				
 				i {
-					border: #F4690C 2px solid;
+					border: @orange 2px solid;
 					border-radius: 6px;
-					box-shadow: 2px 2px #F4690C;
+					box-shadow: 2px 2px @orange;
 					padding-top: 3px;
 				}
 			}
@@ -120,6 +123,14 @@ body {
 	
 	#vann {
 		display: none;
+		
+		h1,h3 {
+			text-align: center;
+		}
+		h1 {
+			color: @orange;
+			font-weight: bolder;
+		}
 	}
 
    
@@ -127,7 +138,7 @@ body {
 	position: absolute;
 	display: table;
 	top: 0;
-	z-index: -1;
+	/* z-index: -1; */
 	
 	#popupWrapper {
 		display: table-cell;
