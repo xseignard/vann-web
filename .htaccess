@@ -1,6 +1,3 @@
 AddType video/mp4 .mp4
 AddType video/webm .webm
-AddType font/ttf .ttf
-AddType font/eot .eot
-AddType font/otf .otf
-AddType font/woff .woff
+AddType application/font-woff .woff
