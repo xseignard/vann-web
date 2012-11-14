@@ -694,7 +694,8 @@ function adjustPOI() {
 	});
 	$('#car').css('height', function() {
 		return (50*yRatio) + 'px';
-	});	
+	});
+	$('#car').removeClass('no-display');
 }
 
 /**
