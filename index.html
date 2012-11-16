@@ -40,7 +40,7 @@
                         </ul>
                         <ul class="nav pull-right">
                             <li class="social first"><a href="https://twitter.com/share" class="twitter-share-button" data-text="Faites un voyage à #Nantes nord!" data-via="vlipp">Tweet</a></li>
-                        	<li class="social"><iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2F82.235.243.114%3A8080%2F&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=true&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:107px; height:21px;" allowTransparency="true"></iframe></li>
+                        	<li class="social"><div class="fb-like" data-href="http://vann.vlipp.fr" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true"></div></li>
 							<li><a href="#about" id="aboutLink">A propos</a></li>
 							<li><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/3.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/fr/80x15.png" /></a></li>
                         </ul>
@@ -151,6 +151,7 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+        <!-- twitter -->
         <script>
         	!function(d,s,id){
         		var js,fjs=d.getElementsByTagName(s)[0];
@@ -161,6 +162,14 @@
         		}
         	}(document,"script","twitter-wjs");
         </script>
-        
+        <!-- facebook -->
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
     </body>
 </html>
